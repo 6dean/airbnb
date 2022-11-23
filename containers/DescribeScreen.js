@@ -42,16 +42,20 @@ export default function DescribeScreen() {
     </View>
   ) : (
     <View>
-      <Image
-        style={{
-          width: "100%",
-          height: 280,
-          resizeMode: "cover",
-        }}
-        source={{
-          uri: data.photos[0].url,
-        }}
-      />
+      <View>
+        <Image
+          style={{
+            width: "100%",
+            height: 280,
+            resizeMode: "cover",
+          }}
+          source={{
+            uri: data.photos[0].url,
+          }}
+        />
+        <Text style={styles.blockPrice}>{data.price} €</Text>
+      </View>
+
       <View
         style={{
           marginLeft: 10,

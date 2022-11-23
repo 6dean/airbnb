@@ -21,6 +21,30 @@ export default {
     marginBottom: 10,
   },
 
+  blockPriceHome: {
+    position: "absolute",
+    top: 130,
+    left: 0,
+    color: "white",
+    fontSize: 20,
+    backgroundColor: "black",
+    padding: 7,
+    paddingLeft: 20,
+    paddingRight: 20,
+  },
+
+  blockPrice: {
+    position: "absolute",
+    top: 200,
+    left: 0,
+    color: "white",
+    fontSize: 24,
+    backgroundColor: "black",
+    padding: 10,
+    paddingLeft: 20,
+    paddingRight: 20,
+  },
+
   logoTitle: {
     marginTop: 80,
     alignItems: "center",

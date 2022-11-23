@@ -55,16 +55,19 @@ export default function HomeScreen() {
                   navigation.navigate("Describe", { id: item._id });
                 }}
               >
-                <Image
-                  style={{
-                    width: "100%",
-                    height: 200,
-                    resizeMode: "cover",
-                  }}
-                  source={{
-                    uri: item.photos[0].url,
-                  }}
-                />
+                <View>
+                  <Image
+                    style={{
+                      width: "100%",
+                      height: 200,
+                      resizeMode: "cover",
+                    }}
+                    source={{
+                      uri: item.photos[0].url,
+                    }}
+                  />
+                  <Text style={styles.blockPriceHome}>{item.price} €</Text>
+                </View>
               </TouchableOpacity>
 
               {/* ------- INFO BLOCK ------- */}

@@ -77,11 +77,17 @@ export default function App() {
                     <Stack.Navigator>
                       <Stack.Screen
                         name="Home"
-                        options={{
-                          title: "My App",
-                          headerStyle: { backgroundColor: "red" },
-                          headerTitleStyle: { color: "white" },
-                        }}
+                        options={() => ({
+                          headerStyle: { marginBottom: 20, flex: 1 },
+
+                          header: () => (
+                            <FontAwesome5
+                              name="airbnb"
+                              size={50}
+                              color="#EB5A62"
+                            />
+                          ),
+                        })}
                       >
                         {() => <HomeScreen />}
                       </Stack.Screen>
