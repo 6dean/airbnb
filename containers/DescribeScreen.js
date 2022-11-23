@@ -110,7 +110,11 @@ export default function DescribeScreen() {
           </View>
         </View>
 
-        <Text ellipsizeMode="tail" numberOfLines={3} style={{ marginTop: 20 }}>
+        <Text
+          ellipsizeMode="tail"
+          numberOfLines={3}
+          style={{ marginTop: 20, padding: 4, width: 400 }}
+        >
           {data.description}
         </Text>
       </View>
