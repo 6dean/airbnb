@@ -9,6 +9,7 @@ import ProfileScreen from "./containers/ProfileScreen";
 import SignInScreen from "./containers/SignInScreen";
 import SignUpScreen from "./containers/SignUpScreen";
 import SettingsScreen from "./containers/SettingsScreen";
+import DescribeScreen from "./containers/DescribeScreen";
 import SplashScreen from "./containers/SplashScreen";
 
 const Tab = createBottomTabNavigator();
@@ -91,6 +92,15 @@ export default function App() {
                         }}
                       >
                         {() => <ProfileScreen />}
+                      </Stack.Screen>
+
+                      <Stack.Screen
+                        name="Describe"
+                        options={{
+                          title: "Description",
+                        }}
+                      >
+                        {() => <DescribeScreen />}
                       </Stack.Screen>
                     </Stack.Navigator>
                   )}

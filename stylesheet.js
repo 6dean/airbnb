@@ -4,6 +4,22 @@ export default {
     height: 800,
   },
 
+  homePage: {
+    padding: 10,
+  },
+
+  blockApp: {
+    marginBottom: 30,
+    marginLeft: 10,
+    marginRight: 10,
+    borderBottomWidth: 2,
+    borderBottomColor: "lightgrey",
+  },
+
+  blockTitle: {
+    fontSize: 18,
+  },
+
   logoTitle: {
     marginTop: 80,
     alignItems: "center",
