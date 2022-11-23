@@ -17,6 +17,7 @@ export default function SignUpScreen({ setToken }) {
   const [username, setUsername] = useState("");
   const [description, setDescription] = useState("");
   const [password, setPassword] = useState("");
+  const [confirm, setConfirm] = useState("");
 
   return (
     <View style={styles.page}>
@@ -78,7 +79,7 @@ export default function SignUpScreen({ setToken }) {
           placeholder="Password"
           secureTextEntry={true}
           onChangeText={(pass) => {
-            setPassword(pass);
+            setConfirm(pass);
           }}
         />
 
@@ -91,7 +92,10 @@ export default function SignUpScreen({ setToken }) {
             onPress={async () => {
               try {
                 if (!email || !password) {
-                  alert`Informations incomplètes`;
+                  alert`You need to complete form !`;
+                }
+                if (password !== confirm) {
+                  alert`Your passwords are not identical !`;
                 } else {
                   const formData = new FormData();
                   formData.append("email", email);
