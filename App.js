@@ -78,7 +78,7 @@ export default function App() {
                       <Stack.Screen
                         name="Home"
                         options={() => ({
-                          headerStyle: { marginBottom: 20, flex: 1 },
+                          headerStyle: { backgroundColor: "white" },
 
                           header: () => (
                             <FontAwesome5
