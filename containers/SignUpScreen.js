@@ -18,6 +18,7 @@ export default function SignUpScreen({ setToken }) {
   const [description, setDescription] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
+  const [error, setError] = useState(false);
 
   return (
     <View style={styles.page}>
@@ -86,6 +87,15 @@ export default function SignUpScreen({ setToken }) {
         {/* ======= SIGNUP AND REGISTER ======= */}
 
         <View style={styles.containerButtonSignUp}>
+          <Text
+            style={
+              error
+                ? { color: "red", marginBottom: 20, fontSize: 13 }
+                : { display: "none" }
+            }
+          >
+            This email already has an account.
+          </Text>
           <TouchableOpacity
             style={styles.button}
             title="Sign in"
@@ -93,28 +103,29 @@ export default function SignUpScreen({ setToken }) {
               try {
                 if (!email || !password) {
                   alert`You need to complete form !`;
+                  return null;
                 }
                 if (password !== confirm) {
                   alert`Your passwords are not identical !`;
+                  return null;
                 } else {
-                  const formData = new FormData();
-                  formData.append("email", email);
-                  formData.append("username", username);
-                  formData.append("description", description);
-                  formData.append("password", password);
-
-                  console.log(username);
-
                   const response = await axios.post(
                     `https://express-airbnb-api.herokuapp.com/user/sign_up`,
-                    formData
+                    {
+                      email: email,
+                      username: username,
+                      description: description,
+                      password: password,
+                    }
                   );
-                  console.log(response.data);
                   const userToken = response.data.token;
                   setToken(userToken);
                 }
               } catch (error) {
-                console.log(error.response);
+                error.response.data?.error ===
+                "This username already has an account."
+                  ? setError(true)
+                  : null;
               }
             }}
           >
