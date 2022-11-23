@@ -83,7 +83,7 @@ export default function HomeScreen() {
                     navigation.navigate("Describe", { id: item._id });
                   }}
                 >
-                  <View style={{ width: 270 }}>
+                  <View style={{ width: 265 }}>
                     <Text
                       ellipsizeMode="tail"
                       numberOfLines={1}

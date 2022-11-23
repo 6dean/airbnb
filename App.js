@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { TouchableOpacity } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, AntDesign, FontAwesome5 } from "@expo/vector-icons";
 import HomeScreen from "./containers/HomeScreen";
 import ProfileScreen from "./containers/ProfileScreen";
 import SignInScreen from "./containers/SignInScreen";
@@ -96,9 +97,21 @@ export default function App() {
 
                       <Stack.Screen
                         name="Describe"
-                        options={{
-                          title: "Description",
-                        }}
+                        options={({ navigation }) => ({
+                          headerLeft: () => (
+                            <TouchableOpacity
+                              onPress={() => {
+                                navigation.goBack();
+                              }}
+                            >
+                              <AntDesign
+                                name="arrowleft"
+                                size={24}
+                                color="grey"
+                              />
+                            </TouchableOpacity>
+                          ),
+                        })}
                       >
                         {() => <DescribeScreen />}
                       </Stack.Screen>

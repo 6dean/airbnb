@@ -69,7 +69,7 @@ export default function DescribeScreen() {
             marginRight: 10,
           }}
         >
-          <View style={{ width: "65%" }}>
+          <View style={{ width: 265 }}>
             <Text
               ellipsizeMode="tail"
               numberOfLines={1}
@@ -85,7 +85,7 @@ export default function DescribeScreen() {
               }}
             >
               <Text>{renderingStars(data.ratingValue)}</Text>
-              <Text>{data.reviews} Reviews</Text>
+              <Text style={{ color: "grey" }}>{data.reviews} Reviews</Text>
             </View>
           </View>
 
