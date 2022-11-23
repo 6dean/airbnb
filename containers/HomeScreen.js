@@ -74,6 +74,8 @@ export default function HomeScreen() {
                   flexDirection: "row",
                   justifyContent: "space-between",
                   alignItems: "center",
+                  marginTop: 10,
+                  marginBottom: 10,
                 }}
               >
                 <TouchableOpacity
@@ -81,7 +83,7 @@ export default function HomeScreen() {
                     navigation.navigate("Describe", { id: item._id });
                   }}
                 >
-                  <View style={{ width: "70%" }}>
+                  <View style={{ width: 270 }}>
                     <Text
                       ellipsizeMode="tail"
                       numberOfLines={1}
@@ -97,7 +99,9 @@ export default function HomeScreen() {
                       }}
                     >
                       <Text>{renderingStars(item.ratingValue)}</Text>
-                      <Text>{item.reviews} Reviews</Text>
+                      <Text style={{ color: "grey" }}>
+                        {item.reviews} Reviews
+                      </Text>
                     </View>
                   </View>
                 </TouchableOpacity>

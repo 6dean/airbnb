@@ -18,6 +18,7 @@ export default {
 
   blockTitle: {
     fontSize: 18,
+    marginBottom: 10,
   },
 
   logoTitle: {
