@@ -28,9 +28,9 @@ export default function HomeScreen() {
     let stars = [];
     for (let index = 1; index < 6; index++) {
       if (index <= item) {
-        stars.push(<Entypo name="star" size={24} color="orange" />);
+        stars.push(<Entypo name="star" size={24} color="orange" key={index} />);
       } else {
-        stars.push(<Entypo name="star" size={24} color="grey" />);
+        stars.push(<Entypo name="star" size={24} color="grey" key={index} />);
       }
     }
     return stars;

@@ -35,7 +35,7 @@ export default {
 
   blockPrice: {
     position: "absolute",
-    top: 200,
+    bottom: 30,
     left: 0,
     color: "white",
     fontSize: 24,

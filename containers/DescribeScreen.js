@@ -5,7 +5,7 @@ import styles from "../stylesheet";
 import MapView from "react-native-maps";
 import { Text, View, Image, ActivityIndicator } from "react-native";
 import axios from "axios";
-import { ScrollView } from "react-native-web";
+import Swiper from "react-native-swiper";
 
 export default function DescribeScreen() {
   const { params } = useRoute();
@@ -26,9 +26,9 @@ export default function DescribeScreen() {
     let stars = [];
     for (let index = 1; index < 6; index++) {
       if (index <= review) {
-        stars.push(<Entypo name="star" size={24} color="orange" />);
+        stars.push(<Entypo name="star" size={24} color="orange" key={index} />);
       } else {
-        stars.push(<Entypo name="star" size={24} color="grey" />);
+        stars.push(<Entypo name="star" size={24} color="grey" key={index} />);
       }
     }
     return stars;
@@ -44,7 +44,7 @@ export default function DescribeScreen() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [params.id]);
 
   return isLoading ? (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -52,17 +52,31 @@ export default function DescribeScreen() {
     </View>
   ) : (
     <View>
-      <View>
-        <Image
-          style={{
-            width: "100%",
-            height: 280,
-            resizeMode: "cover",
-          }}
-          source={{
-            uri: data.photos[0].url,
-          }}
-        />
+      <View style={{ height: 300 }}>
+        <Swiper
+          dotColor="salmon"
+          activeDotColor="red"
+          autoplay
+          style={{ height: 300 }}
+        >
+          {data.photos.map((slide) => {
+            return (
+              <View
+                style={{
+                  width: "100%",
+                  height: 300,
+                  resizeMode: "cover",
+                }}
+                key={slide.picture_id}
+              >
+                <Image
+                  source={{ uri: slide.url }}
+                  style={{ height: "100%", width: "100%" }}
+                />
+              </View>
+            );
+          })}
+        </Swiper>
         <Text style={styles.blockPrice}>{data.price} €</Text>
       </View>
 
@@ -129,7 +143,7 @@ export default function DescribeScreen() {
         </Text>
         <View style={{ marginTop: 15 }}>
           <MapView
-            style={{ height: 270, width: "100%" }}
+            style={{ height: 260, width: "100%" }}
             initialRegion={{
               latitude: 48.856614,
               longitude: 2.3522219,

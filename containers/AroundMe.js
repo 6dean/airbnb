@@ -76,6 +76,7 @@ export default function AroundMe() {
       {markers.map((marker) => {
         return (
           <MapView.Marker
+            style={{}}
             onCalloutPress={() =>
               navigation.navigate("Describe", { id: marker.id })
             }
