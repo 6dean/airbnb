@@ -1,28 +1,54 @@
-import MapView from "react-native-maps";
+import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
+import * as Location from "expo-location";
 import { View, ActivityIndicator } from "react-native";
+import { useNavigation } from "@react-navigation/core";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function AroundMe() {
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const navigation = useNavigation();
+
+  const getPermission = async () => {
+    try {
+      const { status } = await Location.requestForegroundPermissionsAsync();
+      if (status === "granted") {
+        const geolocation = await Location.getCurrentPositionAsync();
+        setLatitude(geolocation.coords.latitude);
+        setLongitude(geolocation.coords.longitude);
+      } else {
+        alert("Permission refusée");
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  getPermission();
+
   const fetchData = async () => {
-    const response = await axios.get(
-      `https://express-airbnb-api.herokuapp.com/rooms/around`
-    );
-    setData(response.data);
-    setIsLoading(false);
+    try {
+      const response = await axios.get(
+        `https://express-airbnb-api.herokuapp.com/rooms/around`
+      );
+      setData(response.data);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
-    fetchData();
+    getPermission(), fetchData();
   }, []);
 
-  const location = [];
+  const markers = [];
 
   data.map((elem) =>
-    location.push({
+    markers.push({
       id: elem._id,
       longitude: elem.location[0],
       latitude: elem.location[1],
@@ -31,8 +57,6 @@ export default function AroundMe() {
     })
   );
 
-  //   console.log("ici =>", location);
-
   return isLoading ? (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <ActivityIndicator></ActivityIndicator>
@@ -40,17 +64,21 @@ export default function AroundMe() {
   ) : (
     <MapView
       style={{ flex: 1 }}
+      //   provider={PROVIDER_GOOGLE}
       initialRegion={{
-        latitude: 48.8564263,
-        longitude: 2.3525276,
-        latitudeDelta: 0.2,
-        longitudeDelta: 0.2,
+        latitude: latitude,
+        longitude: longitude,
+        latitudeDelta: 0.06,
+        longitudeDelta: 0.06,
       }}
       showsUserLocation={true}
     >
-      {location.map((marker) => {
+      {markers.map((marker) => {
         return (
           <MapView.Marker
+            onCalloutPress={() =>
+              navigation.navigate("Describe", { id: marker.id })
+            }
             key={marker.id}
             coordinate={{
               latitude: marker.latitude,
