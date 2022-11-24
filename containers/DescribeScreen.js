@@ -2,13 +2,25 @@ import { useRoute } from "@react-navigation/core";
 import { Entypo } from "@expo/vector-icons";
 import { useState, useEffect } from "react";
 import styles from "../stylesheet";
+import MapView from "react-native-maps";
 import { Text, View, Image, ActivityIndicator } from "react-native";
 import axios from "axios";
+import { ScrollView } from "react-native-web";
 
 export default function DescribeScreen() {
   const { params } = useRoute();
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  const markers = [
+    {
+      id: 1,
+      latitude: 48.8564263,
+      longitude: 2.3525276,
+      title: "Paris",
+      description: "Hotel de Ville",
+    },
+  ];
 
   const renderingStars = (review) => {
     let stars = [];
@@ -33,8 +45,6 @@ export default function DescribeScreen() {
   useEffect(() => {
     fetchData();
   }, []);
-
-  //   console.log(data.photos[0].url);
 
   return isLoading ? (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -117,6 +127,32 @@ export default function DescribeScreen() {
         >
           {data.description}
         </Text>
+        <View style={{ marginTop: 15 }}>
+          <MapView
+            style={{ height: 270, width: "100%" }}
+            initialRegion={{
+              latitude: 48.856614,
+              longitude: 2.3522219,
+              latitudeDelta: 0.006,
+              longitudeDelta: 0.006,
+            }}
+            showsUserLocation={true}
+          >
+            {markers.map((marker) => {
+              return (
+                <MapView.Marker
+                  key={marker.id}
+                  coordinate={{
+                    latitude: marker.latitude,
+                    longitude: marker.longitude,
+                  }}
+                  title={marker.title}
+                  description={marker.description}
+                />
+              );
+            })}
+          </MapView>
+        </View>
       </View>
     </View>
   );
