@@ -24,8 +24,8 @@ export default function AroundMe() {
   data.map((elem) =>
     location.push({
       id: elem._id,
-      latitude: elem.location[0],
-      longitude: elem.location[1],
+      longitude: elem.location[0],
+      latitude: elem.location[1],
       title: elem.title,
       description: elem.description,
     })
@@ -43,20 +43,12 @@ export default function AroundMe() {
       initialRegion={{
         latitude: 48.8564263,
         longitude: 2.3525276,
-        latitudeDelta: 0.1,
-        longitudeDelta: 0.1,
+        latitudeDelta: 0.2,
+        longitudeDelta: 0.2,
       }}
       showsUserLocation={true}
     >
       {location.map((marker) => {
-        console.log(
-          "ID :",
-          marker.id,
-          "LATITUDE :",
-          marker.latitude,
-          "LONGITUDE :",
-          marker.longitude
-        );
         return (
           <MapView.Marker
             key={marker.id}
