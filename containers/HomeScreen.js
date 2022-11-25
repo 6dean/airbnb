@@ -44,12 +44,12 @@ export default function HomeScreen() {
     <View style={styles.homePage}>
       <FlatList
         data={data}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item._id}
         renderItem={({ item }) => {
           return (
             // ------- IMAGE BLOCK -------
 
-            <View style={styles.blockApp}>
+            <View key={item} style={styles.blockApp}>
               <TouchableOpacity
                 onPress={() => {
                   navigation.navigate("Describe", { id: item._id });
