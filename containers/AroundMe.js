@@ -32,7 +32,7 @@ export default function AroundMe() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `https://express-airbnb-api.herokuapp.com/rooms/around`
+        `https://express-airbnb-api.herokuapp.com/rooms/around?${latitude}&longitude=${longitude}`
       );
       setData(response.data);
       setIsLoading(false);
@@ -64,12 +64,12 @@ export default function AroundMe() {
   ) : (
     <MapView
       style={{ flex: 1 }}
-      //   provider={PROVIDER_GOOGLE}
+      // provider={PROVIDER_GOOGLE}
       initialRegion={{
         latitude: latitude,
         longitude: longitude,
-        latitudeDelta: 0.06,
-        longitudeDelta: 0.06,
+        latitudeDelta: 0.1,
+        longitudeDelta: 0.1,
       }}
       showsUserLocation={true}
     >

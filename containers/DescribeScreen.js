@@ -9,18 +9,18 @@ import Swiper from "react-native-swiper";
 
 export default function DescribeScreen() {
   const { params } = useRoute();
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
-  const markers = [
-    {
-      id: 1,
-      latitude: 48.8564263,
-      longitude: 2.3525276,
-      title: "Paris",
-      description: "Hotel de Ville",
-    },
-  ];
+  // const markers = [
+  //   {
+  //     id: 1,
+  //     latitude: 48.8564263,
+  //     longitude: 2.3525276,
+  //     title: "Paris",
+  //     description: "Hotel de Ville",
+  //   },
+  // ];
 
   const renderingStars = (review) => {
     let stars = [];
@@ -39,12 +39,15 @@ export default function DescribeScreen() {
       `https://express-airbnb-api.herokuapp.com/rooms/${params.id}`
     );
     setData(response.data);
+
     setIsLoading(false);
   };
 
   useEffect(() => {
     fetchData();
   }, [params.id]);
+
+  // console.log(data);r
 
   return isLoading ? (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -145,26 +148,22 @@ export default function DescribeScreen() {
           <MapView
             style={{ height: 260, width: "100%" }}
             initialRegion={{
-              latitude: 48.856614,
-              longitude: 2.3522219,
-              latitudeDelta: 0.006,
-              longitudeDelta: 0.006,
+              latitude: data.location[1],
+              longitude: data.location[0],
+              latitudeDelta: 0.007,
+              longitudeDelta: 0.007,
             }}
             showsUserLocation={true}
           >
-            {markers.map((marker) => {
-              return (
-                <MapView.Marker
-                  key={marker.id}
-                  coordinate={{
-                    latitude: marker.latitude,
-                    longitude: marker.longitude,
-                  }}
-                  title={marker.title}
-                  description={marker.description}
-                />
-              );
-            })}
+            <MapView.Marker
+              key={data._id}
+              coordinate={{
+                latitude: data.location[1],
+                longitude: data.location[0],
+              }}
+              title={data.title}
+              description={data.description}
+            />
           </MapView>
         </View>
       </View>

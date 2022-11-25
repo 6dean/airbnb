@@ -25,6 +25,10 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [userToken, setUserToken] = useState(null);
 
+  function LogoTitle() {
+    return <FontAwesome5 name="airbnb" size={40} color="#EB5A62" />;
+  }
+
   const setToken = async (token) => {
     if (token) {
       await AsyncStorage.setItem("userToken", token);
@@ -83,15 +87,15 @@ export default function App() {
                       <Stack.Screen
                         name="Home"
                         options={() => ({
-                          headerStyle: { marginBottom: 20, flex: 1 },
+                          headerTitle: () => <LogoTitle />,
 
-                          header: () => (
-                            <FontAwesome5
-                              name="airbnb"
-                              size={50}
-                              color="#EB5A62"
-                            />
-                          ),
+                          // header: () => (
+                          //   <FontAwesome5
+                          //     name="airbnb"
+                          //     size={50}
+                          //     color="#EB5A62"
+                          //   />
+                          // ),
                         })}
                       >
                         {() => <HomeScreen />}
