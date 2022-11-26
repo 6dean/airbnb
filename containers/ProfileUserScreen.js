@@ -32,7 +32,39 @@ export default function ProfileUserScreen({ userToken, setToken, userID }) {
     try {
       const response = await axios.put(
         `https://express-airbnb-api.herokuapp.com/user/update`,
-        { email: email, username: username, description: description },
+        {
+          email: email,
+          username: username,
+          description: description,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+      setData(response.data);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const userPicture = async () => {
+    try {
+      const tab = selectedPicture.split(".");
+
+      const formData = new FormData();
+
+      formData.append("photo", {
+        uri: selectedPicture,
+        name: `my-pic.${tab[1]}`,
+        type: `image/${tab[1]}`,
+      });
+      console.log(formData);
+
+      const response = await axios.put(
+        `https://express-airbnb-api.herokuapp.com/user/upload_picture`,
+        formData,
         {
           headers: {
             Authorization: `Bearer ${userToken}`,
@@ -157,7 +189,8 @@ export default function ProfileUserScreen({ userToken, setToken, userID }) {
           style={styles.button}
           title="Update"
           onPress={async () => {
-            updateInfos();
+            description && updateInfos();
+            selectedPicture && userPicture();
           }}
         >
           <Text style={styles.buttonText}> Update</Text>
