@@ -80,6 +80,11 @@ export default {
 
   containerButton: { marginTop: 140, alignItems: "center" },
   containerButtonSignUp: { marginTop: 50, alignItems: "center" },
+  containerButtonProfile: {
+    marginTop: 30,
+    alignItems: "center",
+    marginBottom: 20,
+  },
 
   textInput: {
     marginLeft: 40,

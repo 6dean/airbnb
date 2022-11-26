@@ -1,17 +1,12 @@
 import { useNavigation } from "@react-navigation/core";
 import axios from "axios";
 import { FontAwesome5 } from "@expo/vector-icons";
-import {
-  Text,
-  TextInput,
-  View,
-  TouchableOpacity,
-  Platform,
-} from "react-native";
+import { Text, TextInput, View, TouchableOpacity } from "react-native";
+import * as Device from "expo-device";
 import { useState } from "react";
 import styles from "../stylesheet";
 
-export default function SignInScreen({ setToken }) {
+export default function SignInScreen({ setToken, setID }) {
   const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,7 +18,9 @@ export default function SignInScreen({ setToken }) {
 
       <View
         style={
-          Platform.OS !== "android" ? styles.logoTitle : styles.logoTitleAndroid
+          Device.brand !== "android"
+            ? styles.logoTitle
+            : styles.logoTitleAndroid
         }
       >
         <FontAwesome5 name="airbnb" size={120} color="#EB5A62" />
@@ -76,9 +73,11 @@ export default function SignInScreen({ setToken }) {
                       password: password,
                     }
                   );
-                  console.log(response);
                   const userToken = response.data.token;
+                  const userID = response.data.id;
+                  console.log(response.data);
                   setToken(userToken);
+                  setID(userID);
                   setError(false);
                 }
               } catch (error) {

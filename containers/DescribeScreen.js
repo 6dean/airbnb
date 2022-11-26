@@ -12,16 +12,6 @@ export default function DescribeScreen() {
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
-  // const markers = [
-  //   {
-  //     id: 1,
-  //     latitude: 48.8564263,
-  //     longitude: 2.3525276,
-  //     title: "Paris",
-  //     description: "Hotel de Ville",
-  //   },
-  // ];
-
   const renderingStars = (review) => {
     let stars = [];
     for (let index = 1; index < 6; index++) {

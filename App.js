@@ -11,10 +11,10 @@ import {
   FontAwesome,
 } from "@expo/vector-icons";
 import HomeScreen from "./containers/HomeScreen";
-import ProfileScreen from "./containers/ProfileScreen";
+import Settings from "./containers/Settings";
 import SignInScreen from "./containers/SignInScreen";
 import SignUpScreen from "./containers/SignUpScreen";
-import SettingsScreen from "./containers/SettingsScreen";
+import ProfileUserScreen from "./containers/ProfileUserScreen";
 import DescribeScreen from "./containers/DescribeScreen";
 import AroundMe from "./containers/AroundMe";
 
@@ -24,6 +24,7 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [userToken, setUserToken] = useState(null);
+  const [userID, setUserId] = useState(null);
 
   function LogoTitle() {
     return <FontAwesome5 name="airbnb" size={40} color="#EB5A62" />;
@@ -38,6 +39,15 @@ export default function App() {
 
     setUserToken(token);
   };
+
+  const setID = async (id) => {
+    if (id) {
+      await AsyncStorage.setItem("userID", id);
+    }
+    setUserId(id);
+  };
+
+  // const setID = async ()
 
   useEffect(() => {
     const bootstrapAsync = async () => {
@@ -57,10 +67,10 @@ export default function App() {
         {userToken === null ? (
           <>
             <Stack.Screen name="SignIn">
-              {() => <SignInScreen setToken={setToken} />}
+              {() => <SignInScreen setToken={setToken} setID={setID} />}
             </Stack.Screen>
             <Stack.Screen name="SignUp">
-              {() => <SignUpScreen setToken={setToken} />}
+              {() => <SignUpScreen setToken={setToken} setID={setID} />}
             </Stack.Screen>
           </>
         ) : (
@@ -107,7 +117,7 @@ export default function App() {
                           title: "User Profile",
                         }}
                       >
-                        {() => <ProfileScreen />}
+                        {() => <Settings />}
                       </Stack.Screen>
 
                       <Stack.Screen
@@ -161,11 +171,7 @@ export default function App() {
                   options={{
                     tabBarLabel: "Profile",
                     tabBarIcon: ({ color, size }) => (
-                      <Ionicons
-                        name={"ios-options"}
-                        size={size}
-                        color={color}
-                      />
+                      <AntDesign name="user" size={size} color={color} />
                     ),
                   }}
                 >
@@ -174,10 +180,16 @@ export default function App() {
                       <Stack.Screen
                         name="Settings"
                         options={{
-                          title: "Settings",
+                          title: "Your Profile",
                         }}
                       >
-                        {() => <SettingsScreen setToken={setToken} />}
+                        {() => (
+                          <ProfileUserScreen
+                            userToken={userToken}
+                            setToken={setToken}
+                            userID={userID}
+                          />
+                        )}
                       </Stack.Screen>
                     </Stack.Navigator>
                   )}

@@ -1,12 +1,7 @@
-import {
-  TouchableOpacity,
-  Text,
-  TextInput,
-  View,
-  Platform,
-} from "react-native";
+import { TouchableOpacity, Text, TextInput, View } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 import { FontAwesome5 } from "@expo/vector-icons";
+import * as Device from "expo-device";
 import { useState } from "react";
 import axios from "axios";
 import styles from "../stylesheet";
@@ -26,14 +21,14 @@ export default function SignUpScreen({ setToken }) {
 
       <View
         style={
-          Platform.OS !== "android"
+          Device.brand !== "android"
             ? styles.logoTitleSignUpiOs
             : styles.logoTitleSignUpAndroid
         }
       >
         <FontAwesome5
           name="airbnb"
-          size={Platform.OS !== "android" ? 120 : 70}
+          size={Device.brand !== "android" ? 120 : 70}
           color="#EB5A62"
         />
         <Text style={{ fontSize: 20 }}>Sign up</Text>
