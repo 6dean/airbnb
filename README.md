@@ -15,3 +15,8 @@ I have made a replica of Airbnb on mobile device (Ios and Android)
 - Google Maps doesn't zoom on iOS so I use only Plan
 - i need to add one picture and price from offer on the map
 - Displaying full description with a button in offer view
+
+# TOOLS
+
+xCode and Android studio emulator with EXPO.
+I used iPhone 14 Pro max and Pixel 4 to work on the app.
