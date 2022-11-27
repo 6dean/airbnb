@@ -20,3 +20,8 @@ I have made a replica of Airbnb on mobile device (Ios and Android)
 
 xCode and Android studio emulator with EXPO.
 I used iPhone 14 Pro max and Pixel 4 to work on the app.
+
+# DEMO
+
+<img width="294" alt="Capture d’écran 2022-11-27 à 13 22 17" src="https://user-images.githubusercontent.com/114014511/204134989-2f08e701-b80e-4158-922d-25f0c5df6402.png">
+
